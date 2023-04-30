@@ -12,12 +12,13 @@ def convert_to_numpy(image):
 def convert_to_memory(image):
     _, image = cv2.imencode(".png", image)
     image = io.BytesIO(image)
-    image = InMemoryUploadedFile(image, None, "islenmisfoto_django_dinamik_fotoya_izinver_lutfen.png", "image/png", image.tell(), None)
+    image = InMemoryUploadedFile(image, None, "image.png", "image/png", image.tell(), None)
     return image
 #rotate
 def rotate(image, angle):
     image = convert_to_numpy(image)
-    rotatedImage = cv2.rotate(image, angle)
+    rotatedImage = cv2.getRotationMatrix2D((image.shape[1] / 2, image.shape[0] / 2), angle, 1)
+    rotatedImage = cv2.warpAffine(image, rotatedImage, (image.shape[1], image.shape[0]))
     image = convert_to_memory(rotatedImage)
     return image
 
