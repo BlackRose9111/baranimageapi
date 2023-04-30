@@ -17,7 +17,7 @@ def convert_to_memory(image):
 #rotate
 def rotate(image, angle):
     image = convert_to_numpy(image)
-    rotatedImage = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    rotatedImage = cv2.rotate(image, angle)
     image = convert_to_memory(rotatedImage)
     return image
 
