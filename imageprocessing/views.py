@@ -21,9 +21,11 @@ def index(request : HttpRequest):
         if form.cleaned_data['rotate']:
             image = imageprocessor.rotate(image, form.cleaned_data['rotate'])
         #check if the user ticked the mirror checkbox
-        print(form.cleaned_data['mirror'])
-        if form.cleaned_data['mirror']:
+        print(form.cleaned_data['mirror_horizontally'])
+        if form.cleaned_data['mirror_horizontally']:
             image = imageprocessor.mirror(image)
+        if form.cleaned_data['mirror_vertically']:
+            image = imageprocessor.mirror_v(image)
         #check if the user entered any resize dimensions, if they left one blank, it will be the same as the original image
         if form.cleaned_data['width'] and form.cleaned_data['height']:
             width = form.cleaned_data['width']

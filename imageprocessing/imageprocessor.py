@@ -45,3 +45,10 @@ def crop(image, top_coordinate,left_coordinate,bottom_coordinate,right_coordinat
     image = convert_to_memory(croppedImage)
     return image
 
+
+def mirror_v(image):
+    #vertical mirror
+    image = convert_to_numpy(image)
+    mirroredImage = cv2.flip(image, 0)
+    image = convert_to_memory(mirroredImage)
+    return image
