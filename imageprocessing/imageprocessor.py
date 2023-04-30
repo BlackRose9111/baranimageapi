@@ -17,7 +17,7 @@ def convert_to_memory(image):
 #rotate
 def rotate(image, angle):
     image = convert_to_numpy(image)
-    rotatedImage = cv2.getRotationMatrix2D((image.shape[1] / 2, image.shape[0] / 2), angle, 1)
+    rotatedImage = cv2.getRotationMatrix2D((image.shape[1] / 2, image.shape[0] / 2), -angle, 1)
     rotatedImage = cv2.warpAffine(image, rotatedImage, (image.shape[1], image.shape[0]))
     image = convert_to_memory(rotatedImage)
     return image
