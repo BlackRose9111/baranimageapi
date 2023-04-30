@@ -15,14 +15,6 @@ def convert_to_memory(image):
     image = InMemoryUploadedFile(image, None, "image.png", "image/png", image.tell(), None)
     return image
 #rotate
-def rotate(image, angle):
-    image = convert_to_numpy(image)
-    rotatedImage = cv2.getRotationMatrix2D((image.shape[1] / 2, image.shape[0] / 2), -angle, 1)
-    rotatedImage = cv2.warpAffine(image, rotatedImage, (image.shape[1], image.shape[0]))
-    image = convert_to_memory(rotatedImage)
-    return image
-
-
 
 #mirror
 def mirror(image):
@@ -35,6 +27,16 @@ def resize(image, width, height):
     image = convert_to_numpy(image)
     resizedImage = cv2.resize(image, (width, height))
     image = convert_to_memory(resizedImage)
+    return image
+
+
+def rotate(image, angle):
+    image = convert_to_numpy(image)
+
+    rotatedImage = cv2.getRotationMatrix2D((image.shape[1] / 2, image.shape[0] / 2), -angle, 1)
+    rotatedImage = cv2.warpAffine(image, rotatedImage, (image.shape[1], image.shape[0]))
+
+    image = convert_to_memory(rotatedImage)
     return image
 
 
