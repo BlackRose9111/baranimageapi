@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>ÖMER FARUK BARAN</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <img id="image-preview" src="#" alt="Preview Image" style="display: none;">
+    {{ form.as_p }}
+
+    <button type="submit">Process</button>
+</form>
+
+<script>
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var preview = document.getElementById("image-preview");
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.getElementById("id_image").addEventListener("change", function () {
+        previewImage(this);
+    });
+</script>
+
+</body>
+</html>
